@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popular Artist</title>
+    <style>
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    h1, h3 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #4caf50;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label >Age: </label>
+        <input type="number" name="age" step="0.1" required><br>
+        <label >Gender: </label>
+        <input type="number" name="gender" step="0.1" required><br>
+        <label >District : </label>
+        <input type="number" name="district_no" step="0.1" required><br>
+
+        <input type="submit" value="Show My Artist">
+    </form>
+    {% if content %}
+    <h1>The prediction is : {{ content }} from Rwanda</h1><br>
+    <hr>
+    <a href="">DISPLAY ACCURACY SCORES</a>
+    {% endif %}
+    {% if scores %}
+    <h1>The most Loved Rwandan Artist </h1>
+    <h3>Will be displayed here: </h3>
+    <table>
+        <tr>
+            <th><h1>Models</h1></th>
+            <th><h1>Score</h1></th>
+        </tr>
+        {% for model, score in scores.items %}
+        <tr>
+            <td>{{ model }} </td>
+            <td>{{ score }} %</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
